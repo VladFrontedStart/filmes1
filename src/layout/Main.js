@@ -13,12 +13,12 @@ class Main extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://www.omdbapi.com/?apikey=823ec9ac&s=matrix")
+        fetch("https://www.omdbapi.com/?apikey=823ec9ac&s=matrix")
             .then(response => response.json())
             .then(data => this.setState({ movies: data.Search, loading: false, count: data.totalResults }))
     }
 
-    searchMovie = (str, type = "all", page) => { 
+    searchMovie = (str, type = "all", page) => {
         this.setState({ loading: true })
         fetch(`http://www.omdbapi.com/?apikey=823ec9ac&s=${str}${type !== "all" ? `&type=${type}` : ''}${`&page=${page}`}`)
             .then(response => response.json())
@@ -32,7 +32,7 @@ class Main extends React.Component {
         return (
             <div className="main">
                 <div className="wrap">
-                    <Search searchMovie={this.searchMovie}  totalCount = {count}/>
+                    <Search searchMovie={this.searchMovie} totalCount={count} />
                     {
                         loading ? <Preloader /> : <MovieList movies={movies} />
                     }
